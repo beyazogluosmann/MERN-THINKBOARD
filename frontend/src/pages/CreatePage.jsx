@@ -22,7 +22,7 @@ const CreatePage = () => {
    
     setLoading(true)
     try{
-      await axios.post("http://localhost:5001/api/notes", {
+      await api.post("/notes", {
         title,
         content
       })
@@ -30,7 +30,12 @@ const CreatePage = () => {
       navigate("/")
     } catch (error) {
      console.log("Error crating note", error); 
-     toast.error("Failed to create note")
+     if(error.response.status === 429) {
+      toast.error("Slow down! You're creating notes too fast", {
+        duration : 4000,
+        icon : hi 
+      })
+     }
     } finally{
       setLoading(false);
     }
