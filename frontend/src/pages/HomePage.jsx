@@ -15,7 +15,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      try {
+      try { 
         const res = await api.get("/notes");
         console.log(res.data);
         setNotes(res.data);

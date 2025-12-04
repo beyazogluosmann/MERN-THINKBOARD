@@ -9,7 +9,7 @@ function NoteCard({ note,setNotes }) {
 
   const handleDelete = async (e, id) => {
     e.preventDefault();  // get rid of the navigation behaviour
-
+    
     if (!window.confirm("Are you sure you want to delete this notes")) return;
 
 
