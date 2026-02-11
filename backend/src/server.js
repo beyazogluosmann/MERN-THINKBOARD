@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5001
 
 // middleware
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
 }));
 app.use(express.json()); 
 app.use(rateLimiter)

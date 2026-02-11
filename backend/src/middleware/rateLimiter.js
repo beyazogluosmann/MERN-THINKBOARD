@@ -2,6 +2,12 @@ import rateLimit from "../config/upstash.js"
 
 const rateLimiter = async (req, res, next) => {
     try {
+        // Upstash bağlantısı yoksa rate limiting'i atla
+        if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+            console.warn("Rate limiting disabled - Upstash credentials not configured");
+            return next();
+        }
+
         const { success } = await rateLimit.limit("my-limit-key")
 
         if (!success) {
@@ -13,7 +19,8 @@ const rateLimiter = async (req, res, next) => {
         next()
     } catch (error) {
         console.error("Rate limit error", error);
-        next(error)
+        // Hata durumunda rate limiting'i atla, uygulamayı çökertme
+        next()
     }
 }
 
