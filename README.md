@@ -1,3 +1,5 @@
+You can TRY DEMO : https://mern-thinkboard-snxn.onrender.com 
+
 Backend (/backend)
 MONGO_URI=<your_mongo_uri>
 
